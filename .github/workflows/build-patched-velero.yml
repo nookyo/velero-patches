@@ -31,23 +31,6 @@ jobs:
       packages: write
 
     steps:
-      - name: Create tag and GitHub release
-        uses: Netcracker/qubership-workflow-hub/actions/tag-action@main
-        with:
-          ref: ${{ github.ref_name }}
-          tag-name: ${{ inputs.tag }}
-          force-create: ${{ inputs.force-create }}
-          tag-message: "Patched build of Velero ${{ inputs.velero-tag }}"
-          create-release: true
-          draft-release: true
-          switch-to-tag: false
-          skip-checkout: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Clean workspace
-        run: rm -rf ./*
-
       - name: Checkout upstream Velero source
         uses: actions/checkout@v6.0.2
         with:
@@ -127,23 +110,3 @@ jobs:
             REGISTRY=ghcr.io/${{ steps.meta.outputs.repo_owner_lc }}
             RESTIC_VERSION=${{ steps.meta.outputs.restic_version }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Publish GitHub Release
-        run: |
-          gh release edit "${{ inputs.tag }}" \
-            --title "Velero ${{ inputs.velero-tag }} (patched)" \
-            --notes "Patched build of [Velero ${{ inputs.velero-tag }}](https://github.com/vmware-tanzu/velero/releases/tag/${{ inputs.velero-tag }}).
-
-          ## Docker image
-
-          \`\`\`
-          ghcr.io/${{ steps.meta.outputs.repo_owner_lc }}/${{ github.event.repository.name }}:${{ inputs.tag }}
-          \`\`\`
-
-          ## Patches applied
-
-          Patches from \`patches/${{ inputs.velero-tag }}/\` directory." \
-            --draft=false \
-            ${{ (contains(inputs.tag, 'alpha') || contains(inputs.tag, 'beta') || contains(inputs.tag, 'rc')) && '--prerelease' || '--latest' }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
