@@ -1,18 +1,12 @@
 diff --git a/README.md b/README.md
 --- a/README.md
 +++ b/README.md
-@@ -1 +1,12 @@
+@@ -1 +1,8 @@
 +> [!NOTE]
-+> This is a **patched build** of Velero maintained by [nookyo](https://github.com/nookyo/velero-patches).
++> This is a **patched build** of Velero maintained by [nookyo/velero-patches](https://github.com/nookyo/velero-patches).
 +> Docker image: ghcr.io/nookyo/velero-patches:v1.15.0-patched
-+>
-+> For the list of applied patches see the
-+> [releases page](https://github.com/nookyo/velero-patches/releases).
-+> For the original upstream source see
-+> [vmware-tanzu/velero](https://github.com/vmware-tanzu/velero).
-+>
-+> To report issues with the patches open an issue in
-+> [nookyo/velero-patches](https://github.com/nookyo/velero-patches/issues).
-+> To report upstream Velero issues use the [upstream tracker](https://github.com/vmware-tanzu/velero/issues).
-+
++> For applied patches see [releases](https://github.com/nookyo/velero-patches/releases).
++> Upstream source: [vmware-tanzu/velero](https://github.com/vmware-tanzu/velero).
++> Patch issues: [nookyo/velero-patches](https://github.com/nookyo/velero-patches/issues).
++> Upstream issues: [vmware-tanzu/velero](https://github.com/vmware-tanzu/velero/issues).
  ![100]
